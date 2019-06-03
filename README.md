@@ -13,5 +13,5 @@ Please make sure you have the following available.
 
 ![alt text](https://raw.githubusercontent.com/tchaudhary/redshift-alexa-analytics/master/images/lambda_env_variables.png)
 
-2) For this project, the lambda is in a private subnet so a NAT gateway needs to be assocaited with lambda in order to interact with Alexa and Redshift. More information about this is here: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
+2) For this project, the lambda is in a private subnet so a NAT gateway was needed to be assocaited with the private subnet in order to interact with Alexa and Redshift. More information about this is here: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
 
