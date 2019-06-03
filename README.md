@@ -12,5 +12,6 @@ Please make sure you have the following available.
 1) There are few environment variable that needs to be created in the lambda console in order to make the lambda work with Alexa and Redshift.
 
 ![alt text](https://raw.githubusercontent.com/tchaudhary/redshift-alexa-analytics/master/lambda_env_variables.png)
+
 2) For this project, the lambda is in a private subnet so a NAT gateway needs to be assocaited with lambda in order to interact with Alexa and Redshift. More information about this is here: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/
 
