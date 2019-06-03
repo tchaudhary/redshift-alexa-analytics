@@ -4,5 +4,6 @@ In this project, you will be able to configure alexa to query your redshift data
 
 Please make sure you have the following available.
 
-Amazon Developer account (Free) Note This is different from a typical AWS workflow.\n
+Amazon Developer account (Free) Note This is different from a typical AWS workflow.
+
 AWS Account with admin or full access to all services
