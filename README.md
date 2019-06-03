@@ -11,3 +11,4 @@ Please make sure you have the following available.
 
 1) There are few environment variable that would need to created in the lambda console in order to make the lambda work with Alexa and Redshift.
 
+![alt text](https://raw.githubusercontent.com/tchaudhary/redshift-alexa-analytics/master/lambda_env_variables.png)
