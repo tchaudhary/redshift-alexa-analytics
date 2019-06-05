@@ -60,7 +60,7 @@ def handle_session_end_request():
     return build_response({}, build_speechlet_response(
         card_title, speech_output, None, should_end_session))
 
-def query_redshift_metric(metric):
+def query_redshift_metric(metric,dt):
 
   REDSHIFT_DATABASE = os.environ['REDSHIFT_DATABASE']
   REDSHIFT_USER = os.environ['REDSHIFT_USER']
@@ -68,7 +68,7 @@ def query_redshift_metric(metric):
   REDSHIFT_PORT = os.environ['REDSHIFT_PORT']
   REDSHIFT_ENDPOINT = os.environ['REDSHIFT_ENDPOINT']
   REDSHIFT_CLUSTER = os.environ['REDSHIFT_CLUSTER']
-  REDSHIFT_QUERY = "call get_metric('"+metric+"')"
+  REDSHIFT_QUERY = "call get_alexa_metric('"+metric+"','"+dt+" 00:00:00')"
 
   try:
     conn = psycopg2.connect(
@@ -99,9 +99,9 @@ def query_redshift_metric(metric):
 def get_metric_from_session(intent, session):
     session_attributes = {}
     reprompt_text = None
-    metric_value = query_redshift_metric(intent['slots'][os.environ["slot_name"]]['value'].upper())
+    metric_value = query_redshift_metric(intent['slots'][os.environ["slot_name"]]['value'].upper(),intent['slots'][os.environ["date_slot"]]['value'])
     if metric_value:
-        speech_output = "The value for " + intent['slots'][os.environ["slot_name"]]['value'] + " is " + str(metric_value)
+        speech_output = "The value of " + intent['slots'][os.environ["slot_name"]]['value'] + " for " + intent['slots'][os.environ["date_slot"]]['value'] + " is " + str(metric_value[0][0]) 
         should_end_session = True
     else:
         speech_output = "I'm not sure what that metric is. " \
@@ -117,10 +117,10 @@ def get_metric_from_session(intent, session):
 def get_available_metric_list(intent, session):
     session_attributes = {}
     reprompt_text = None
-    metric_value = query_redshift_metric(intent['slots'][os.environ["list_slot"]]['value'].upper())
+    metric_value = query_redshift_metric(intent['slots'][os.environ["list_slot"]]['value'].upper(),'2019-01-01') #passing default date since date is required input parameter for stored procedure
     if metric_value:
         speech_output = "Here are your available metrics " + str(metric_value)
-        should_end_session = True
+        should_end_session = False
     else:
         speech_output = "I didnt get that"
         should_end_session = False
